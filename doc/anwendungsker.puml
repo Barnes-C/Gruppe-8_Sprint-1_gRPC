@@ -1,0 +1,32 @@
+@startuml Anwendungskern
+!pragma useNewPackage
+skinparam classAttributeIconSize 0
+skinparam componentStyle uml2
+
+package server{
+ package Services{
+    class PokemonsServer{
+      + getPokemon(call: ServerUnaryCall<PokemonRequest>,
+        callback: sendUnaryData<Pokemon>)
+      + getPokemons(call: ServerWritableStream<Empty>)
+      + catchPokemon(call: ServerUnaryCall<PokemonRequest>,
+        callback: sendUnaryData<Pokemon>)
+      + createPokemon(call: ServerReadableStream<Empty>,
+        callback: sendUnaryData<Empty>)
+    }
+ }
+
+package db {}
+package index {}
+
+db --> index
+Services --> index
+
+}
+
+package client{}
+
+client --> server
+
+hide empty members
+@enduml

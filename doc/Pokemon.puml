@@ -1,0 +1,88 @@
+@startuml GRPC_Schnittstelle
+!pragma useNewPackage
+skinparam classAttributeIconSize 0
+skinparam componentStyle uml2
+
+package proto{
+
+package pokemon_grpc_pb.d{
+  interface IPokemonsService{
+   + getPokemon: IPokemonsService_IGetPokemon
+   + getPokemons: IPokemonsService_IGetPokemons
+   + catchPokemon: IPokemonsService_IcatchPokemon
+   + createPokemon: IPokemonsService_ICreatePokemon
+  }
+
+}
+
+package pokemon.proto{
+
+ enum PokemonType {}
+ class Pokemon <<message>> {}
+ class PokemonRequest <<message>> {}
+ interface Pokemons <<service>> {}
+
+Pokemon ..> PokemonType
+PokemonRequest ..> PokemonType
+Pokemons ..> Pokemon
+}
+
+package pokemon_pb.d{
+
+
+
+  enum PokemonType {
+    Normal,
+    Fire,
+    Water,
+    Grass,
+    Electric,
+    Ice,
+    Fighting,
+    Poison,
+    Ground,
+    Flying,
+    Psychic,
+    Bug,
+    Rock,
+    Ghost,
+    Dark,
+    Dragon,
+    Steel,
+    Fairy
+  }
+
+  class Pokemon <<enitity>> {
+    + id?: number
+    + name?: string
+    + caught?: boolean
+    + type?: PokemonType
+  }
+
+  class PokemonRequest{
+     + id?: number
+     + caught?: boolean 
+     + serializeBinary(): Uint8Array;
+     + toObject(includeInstance?: boolean)
+        : PokemonRequest.AsObject;
+     + static toObject(includeInstance: boolean, msg: PokemonRequest)
+: PokemonRequest.AsObject
+     + static serializeBinaryToWriter(message: PokemonRequest, writer: jspb.BinaryWriter) 
+: void
+     + static deserializeBinary(bytes: Uint8Array): PokemonRequest
+     + static deserializeBinaryFromReader(message: PokemonRequest, reader: jspb.BinaryReader)
+: PokemonRequest
+
+
+  }
+Pokemon ..> PokemonType
+PokemonRequest ..> PokemonType
+}
+
+
+pokemon_grpc_pb.d --> pokemon.proto
+pokemon_pb.d --> pokemon.proto
+}
+
+hide empty members
+@enduml

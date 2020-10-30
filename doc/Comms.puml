@@ -1,0 +1,20 @@
+@startuml Anwendungskern
+
+!pragma useNewPackage
+skinparam classAttributeIconSize 0
+skinparam componentStyle uml2
+
+
+Server-[dashed]->Client : Response
+Client->Server : Request
+
+node Server {
+  database "Pokemon Database" {
+  }
+}
+
+node Client {
+}
+
+hide empty members
+@enduml

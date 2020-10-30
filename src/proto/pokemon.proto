@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package Pokemons;
+
+import "google/protobuf/empty.proto";
+
+service Pokemons {
+    rpc GetPokemon(PokemonRequest) returns (Pokemon) {};
+    rpc GetPokemons(google.protobuf.Empty) returns (stream Pokemon) {};
+    rpc catchPokemon(PokemonRequest) returns (Pokemon) {};
+    rpc CreatePokemon(stream Pokemon) returns (google.protobuf.Empty) {}
+} 
+
+enum PokemonType {
+    NORMAL = 0;
+    FIRE = 1;
+    WATER = 2;
+    GRASS = 3;
+    ELECTRIC = 4;
+    ICE = 5;
+    FIGHTING = 6;
+    POISON = 7;
+    GROUND = 8;
+    FLYING = 9;
+    PSYCHIC = 10;
+    Bug = 11;
+    ROCK = 12;
+    GHOST = 13;
+    DARK = 14;
+    DRAGON = 15;
+    STEEL = 16;
+    FAIRY = 17;
+  }
+
+message Pokemon {
+    int32 id = 1;
+    string name = 2;
+    bool caught = 3;
+    PokemonType type = 4;
+}
+
+message PokemonRequest {
+    int32 id = 1;
+    bool caught = 3;
+}
