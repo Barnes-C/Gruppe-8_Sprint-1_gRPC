@@ -19,8 +19,8 @@
   },
   "scripts": {
     "build": "bash ./scripts/build.sh",
-    "start:server": "ts-node src/server/index.ts",
-    "start:client": "ts-node src/client/index.ts",
+    "server": "ts-node src/server/index.ts",
+    "client": "ts-node src/client/index.ts",
     "asciidoc": "ts-node scripts/asciidoc"
   }
 }
